@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from models import db, Hero, Power, HeroPower
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 migrate = Migrate(app, db)
@@ -26,6 +26,10 @@ def list_heroes():
 def list_powers():
     powers = Power.query.all()
     return render_template('powers.html', powers=powers)
+@app.route('/Heropower')
+def list_heropowers():
+    heropowers = HeroPower.query.all()
+    return render_template('heropowers.html', heropowers=heropowers)
 
 if __name__ == '__main__':
     app.run(port=5555)
